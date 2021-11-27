@@ -1,6 +1,7 @@
 name: Linter
 
 on:
+  push:
   pull_request:
       branches: [main]
 
@@ -20,5 +21,6 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_CLANG_FORMAT: false
+          VALIDATE_CPP: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
