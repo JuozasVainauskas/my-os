@@ -1,20 +1,19 @@
-name: Makefile CI 
+name: Makefile CI
+
 on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+      branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: apt-get update && apt-get -y install build-essential nasm genisoimage bochs bochs-sdl && apt-get clean
-
-    - name: make
-      run: make os.iso
+      - name: Install dependencies
+        run: sudo apt-get update && apt-get -y install build-essential nasm genisoimage bochs bochs-sdl && apt-get clean
+      - name: make
+        run: make os.iso
