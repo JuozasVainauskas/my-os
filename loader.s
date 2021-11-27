@@ -2,7 +2,7 @@ global loader
 
 extern kmain
 
-MAGIC_NUMBER equ 0x1BADB002
+MAGIC_NUMBER equ 0x1BADB002     ; ensures GRUB that it is jumping into an OS
 FLAGS        equ 0x0            ; multiboot flags
 CHECKSUM     equ -MAGIC_NUMBER  ; magic number + flags + checksum should equal 0
                                 ; Value standards: https://www.gnu.org/software/grub/manual/multiboot/multiboot.html
