@@ -1,4 +1,5 @@
 global loader
+global outb
 
 extern kmain
 
