@@ -1,8 +1,8 @@
-OBJECTS = loader.o kmain.o
+OBJECTS = loader.o kmain.o io.o
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 		 -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
-LDFLAGS = -T link.ld -melf_i386
+LDFLAGS = -T ./src/link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf
 
@@ -14,7 +14,7 @@ kernel.elf: $(OBJECTS)
 os.iso: kernel.elf
 	cp kernel.elf iso/boot/kernel.elf
 	genisoimage -R                       \
-		-b boot/grub/stage2_eltorito \
+		-b boot/grub/stage2_eltorito     \
 		-no-emul-boot                    \
 		-boot-load-size 4                \
 		-A os                            \
@@ -27,10 +27,10 @@ os.iso: kernel.elf
 run: os.iso
 	qemu-system-x86_64 -cdrom os.iso
 
-%.o: %.c
+%.o: ./src/kernel/%.c
 	$(CC) $(CFLAGS)  $< -o $@
 
-%.o: %.s
+%.o: ./src/asm/%.s
 	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
