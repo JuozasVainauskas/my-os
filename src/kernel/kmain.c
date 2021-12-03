@@ -1,8 +1,7 @@
-#include "headers/io.h"
 #include "headers/printer.h"
 
 int kmain() {
     char output[] = "Text";
-    print(output, 0);
+    print_str(output, 0, FB_BLACK, FB_WHITE);
     return 0;
 }
