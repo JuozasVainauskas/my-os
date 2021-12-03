@@ -7,7 +7,7 @@
 #define FB_HIGH_BYTE_COMMAND    14
 #define FB_LOW_BYTE_COMMAND     15
 
-void fb_write_cell(int i, char c, unsigned char bg, unsigned char fg);
-void fb_move_cursor(unsigned short pos);
+void fb_write_cell(unsigned short position, char c,  unsigned char bg_color, unsigned char fg_color);
+void fb_move_cursor(unsigned short position);
 
 #endif

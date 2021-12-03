@@ -20,6 +20,6 @@ enum {
     FB_WHITE,
 };
 
-void print_str(char* output, int position, unsigned char bg, unsigned char fg);
+void print_str(char* output, int position, unsigned char bg_color, unsigned char fg_color);
 
 #endif
