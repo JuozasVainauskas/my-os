@@ -1,22 +1,17 @@
-#include "headers/io.h"
+#include "headers/framebuffer.h"
 #include "headers/printer.h"
+#include "headers/font.h"
 
-void print(char* output, int position) {
-    for(; *output != '\0'; output++) {
-        fb_write_cell(position++, *output, 0, 15);
+void clear_screen() {
+    unsigned short i = 0;
+    for(; i < MAX_COLUMNS * MAX_ROWS; i++) {
+        fb_write_cell(i, ' ', makeFont(FB_BLACK, FB_LIGHT_GREY));
     }
-    fb_move_cursor(position);
 }
 
-void fb_write_cell(int position, char c, unsigned char bg, unsigned char fg) {
-    char* frameBuffer = (char*) FB_MEMORY_MAPPED_IO;
-    frameBuffer[position * 2] = c;
-    frameBuffer[position * 2 + 1] = ((bg & 0x0F) << 4) | (fg & 0x0F);
-}
-
-void fb_move_cursor(unsigned short position) {
-    outb(FB_COMMAND_PORT, FB_HIGH_BYTE_COMMAND);
-    outb(FB_DATA_PORT,    ((position >> 8) & 0x00FF));
-    outb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
-    outb(FB_DATA_PORT,    position & 0x00FF);
+void print_str(char* output, unsigned short position, Font font) {
+    for(; *output != '\0'; output++) {
+        fb_write_cell(position++, *output, font);
+        fb_move_cursor(position);
+    }
 }
