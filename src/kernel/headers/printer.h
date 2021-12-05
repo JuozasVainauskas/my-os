@@ -36,5 +36,6 @@ void prn_cursor_inc();
 void prn_cursor_dec();
 void prn_move_cursor(unsigned char row, unsigned char column);
 void prn_refresh_cursor();
+void prn_delete_char();
 
 #endif
