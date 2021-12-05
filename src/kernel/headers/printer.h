@@ -2,22 +2,22 @@
 #define OS_WRITER_H
 
 enum {
-    FB_BLACK,
-    FB_BLUE,
-    FB_GREEN,
-    FB_CYAN,
-    FB_MAGENTA,
-    FB_RED,
-    FB_BROWN,
-    FB_LIGHT_GREY,
-    FB_DARK_GREY,
-    FB_LIGHT_BLUE,
-    FB_LIGHT_GREEN,
-    FB_LIGHT_CYAN,
-    FB_LIGHT_RED,
-    FB_LIGHT_MAGENTA,
-    FB_LIGHT_BROWN,
-    FB_WHITE,
+    BLACK,
+    BLUE,
+    GREEN,
+    CYAN,
+    MAGENTA,
+    RED,
+    BROWN,
+    LIGHT_GREY,
+    DARK_GREY,
+    LIGHT_BLUE,
+    LIGHT_GREEN,
+    LIGHT_CYAN,
+    LIGHT_RED,
+    LIGHT_MAGENTA,
+    LIGHT_BROWN,
+    WHITE,
 };
 
 #define MAX_COLUMNS 80
@@ -30,8 +30,11 @@ enum {
 
 void prn_set_color(unsigned char bg_color, unsigned char fg_color);
 void prn_clear_screen();
-void prn_print_str(char* output, unsigned short position);
-void prn_print_char(unsigned short position, char c);
-void prn_move_cursor(unsigned short position);
+void prn_print_str(char* output);
+void prn_print_char(char c);
+void prn_cursor_inc();
+void prn_cursor_dec();
+void prn_move_cursor(unsigned char row, unsigned char column);
+void prn_refresh_cursor();
 
 #endif
