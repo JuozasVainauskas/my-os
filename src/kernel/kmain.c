@@ -1,10 +1,10 @@
 #include "headers/printer.h"
-#include "headers/font.h"
 
 int kmain() {
-    clear_screen();
-    char output[] = "Text";
-    Font font = makeFont(FB_BLACK, FB_LIGHT_GREY);
-    print_str(output, 0, font);
+    char output[] = "Text_";
+    prn_clear_screen();
+    prn_set_color(BLACK, LIGHT_GREY);
+    prn_print_str(output);
+    prn_delete_char();
     return 0;
 }
