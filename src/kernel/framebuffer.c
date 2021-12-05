@@ -1,10 +1,10 @@
 #include "headers/framebuffer.h"
 #include "headers/io.h"
 
-void fb_write_cell(unsigned short position, char c, Font font) {
+void fb_write_cell(unsigned short position, char c, unsigned char color) {
     char* frameBuffer = (char*) FB_MEMORY_MAPPED_IO;
     frameBuffer[position * 2] = c;
-    frameBuffer[position * 2 + 1] = ((font.bg_color & 0x0F) << 4) | (font.fg_color & 0x0F);
+    frameBuffer[position * 2 + 1] = color;
 }
 
 void fb_move_cursor(unsigned short position) {
