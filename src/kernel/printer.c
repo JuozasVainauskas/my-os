@@ -1,4 +1,4 @@
-#include "headers/framebuffer.h"
+#include "headers/io.h"
 #include "headers/printer.h"
 
 unsigned char color = ((FB_BLACK & 0x0F) << 4) | (FB_LIGHT_GREY & 0x0F);
@@ -8,16 +8,33 @@ void prn_set_color(unsigned char bg_color, unsigned char fg_color) {
 }
 
 void prn_clear_screen() {
-    unsigned short i = 0;
-    for(; i < MAX_COLUMNS * MAX_ROWS; i++) {
-        unsigned char clear_color = ((FB_BLACK & 0x0F) << 4) | (FB_LIGHT_GREY & 0x0F);
-        fb_write_cell(i, ' ', clear_color);
+    unsigned char output_color = color;
+    color = ((FB_BLACK & 0x0F) << 4) | (FB_LIGHT_GREY & 0x0F);
+    unsigned short i;
+    for(i=0; i < MAX_COLUMNS * MAX_ROWS; i++) {
+        prn_print_char(i, ' ');
     }
+    color = output_color;
+    prn_move_cursor(0);
 }
 
 void prn_print_str(char* output, unsigned short position) {
-    for(; *output != '\0'; output++) {
-        fb_write_cell(position++, *output, color);
-        fb_move_cursor(position);
+    char* character;
+    for(character = output; *character != '\0'; character++) {
+        prn_print_char(position++, *character);
+        prn_move_cursor(position);
     }
+}
+
+void prn_print_char(unsigned short position, char c) {
+    unsigned char* frameBuffer = (char*) FB_MEMORY_MAPPED_IO;
+    frameBuffer[position * 2] = c;
+    frameBuffer[position * 2 + 1] = color;
+}
+
+void prn_move_cursor(unsigned short position) {
+    outb(FB_COMMAND_PORT, FB_HIGH_BYTE_COMMAND);
+    outb(FB_DATA_PORT,    0x0000);
+    outb(FB_COMMAND_PORT, FB_LOW_BYTE_COMMAND);
+    outb(FB_DATA_PORT,    position & 0x00FF);
 }
