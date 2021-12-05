@@ -11,9 +11,10 @@ void prn_clear_screen() {
     unsigned char output_color = color;
     color = ((FB_BLACK & 0x0F) << 4) | (FB_LIGHT_GREY & 0x0F);
     unsigned short i;
-    for(i=0; i < MAX_COLUMNS * MAX_ROWS; i++) {
+    for(i = MAX_COLUMNS * MAX_ROWS - 1; i > 0; i--) {
         prn_print_char(i, ' ');
     }
+    prn_print_char(0, ' ');
     color = output_color;
     prn_move_cursor(0);
 }
