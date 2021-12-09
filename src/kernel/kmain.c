@@ -1,10 +1,12 @@
-#include "headers/printer.h"
+#include "headers/io.h"
+#include "headers/gdt.h"
 
 int kmain() {
+    gdt_init();
     char output[] = "Text_";
-    prn_clear_screen();
-    prn_set_color(BLACK, LIGHT_GREY);
-    prn_print_str(output);
-    prn_delete_char();
+    io_clear_screen();
+    io_set_color(BLACK, LIGHT_GREY);
+    io_print_str(output);
+    io_delete_char();
     return 0;
 }
