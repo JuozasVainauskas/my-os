@@ -12,6 +12,9 @@
 
 #define GDT_NUM_ENTRIES 3
 
+// https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.pdf
+// Page 98
+
 struct gdt_entry { // 64 bits
     unsigned short limit_low;
     unsigned short base_low;
