@@ -45,7 +45,7 @@ void prn_delete_char() {
 }
 
 void prn_print_char(char symbol) {
-    unsigned char* frameBuffer = (char*) FB_MEMORY_MAPPED_IO;
+    unsigned char* frameBuffer = (unsigned char*) FB_MEMORY_MAPPED_IO;
     unsigned short position = prn_curr_row * 80 + prn_curr_column;
     frameBuffer[position * 2] = symbol;
     frameBuffer[position * 2 + 1] = prn_color;
