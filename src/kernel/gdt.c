@@ -1,7 +1,11 @@
 #include "headers/gdt.h"
 
+gdt_entry_t gdt_entries[GDT_NUM_ENTRIES];
+
 void gdt_init()
 {
+    gdt_ptr_t   gdt_ptr;
+
     gdt_ptr.limit   = sizeof(gdt_entry_t)*GDT_NUM_ENTRIES;
     gdt_ptr.base    = (unsigned int)&gdt_entries;
 

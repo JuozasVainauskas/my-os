@@ -15,7 +15,7 @@
 // https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.pdf
 // Page 98
 
-struct gdt_entry { // 64 bits
+struct gdt_entry {
     unsigned short limit_low;
     unsigned short base_low;
     unsigned char  base_mid;
@@ -25,14 +25,11 @@ struct gdt_entry { // 64 bits
 } __attribute__((packed));
 typedef struct gdt_entry gdt_entry_t;
 
-typedef struct gdt_ptr {
+struct gdt_ptr {
     unsigned short limit; // number of entries in the GDT
     unsigned int base;    // address of the first GDT entry
 } __attribute__((packed));
 typedef struct gdt_ptr gdt_ptr_t;
-
-gdt_entry_t gdt_entries[GDT_NUM_ENTRIES];
-gdt_ptr_t   gdt_ptr;
 
 void gdt_init();
 void gdt_load_and_set(unsigned int gdtAddress);
